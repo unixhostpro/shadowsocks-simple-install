@@ -2,7 +2,7 @@
 export PORT=8000
 export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=16 )
 export IP=$(hostname -I)
-
+export ENCRYPTION=chacha20-ietf-poly1305
 function config() {
 cat > "$1" <<EOF
 {
@@ -11,7 +11,7 @@ cat > "$1" <<EOF
     "local_port":1080,
     "password":"$3",
     "timeout":60,
-    "method":"chacha20-ietf-poly1305"
+    "method":"$ENCRYPTION"
 }
 EOF
 }
