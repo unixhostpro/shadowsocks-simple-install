@@ -30,7 +30,7 @@ function config_info() {
 	echo
 	echo "---------------------------------------"
 	echo "Your shadowsocks proxy configuration:"
-	echo "URL: ss://$( generate_hash chacha20-ietf-poly1305 $1 )@$IP:$2"
+	echo "URL: ss://$(generate_hash chacha20-ietf-poly1305 $PASSWORD)@$IP:$PORT"
 	echo "---------------------------------------"
 #	echo "Android client: https://play.google.com/store/apps/details?id=com.github.shadowsocks"
 #	echo "Clients for other devices: https://shadowsocks.org/en/download/clients.html"
