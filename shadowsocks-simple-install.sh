@@ -1,4 +1,7 @@
 #!/bin/bash
+export PORT=8000
+export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=16 )
+
 function config() {
 cat > "$1" <<EOF
 {
@@ -22,7 +25,7 @@ function generate_hash() {
 	echo -n "$1":"$2" | base64
 }
 
-function config() {
+function config_info() {
 	echo
 	echo "---------------------------------------"
 	echo "Your shadowsocks proxy configuration:"
@@ -36,8 +39,8 @@ function config() {
 apt update
 apt install -y shadowsocks-libev # install shadowsocks
 mkdir -p /etc/shadowsocks-libev # ceate config directory
-config /etc/shadowsocks-libev/config.json $2 $3
-ufw_port $2
+config /etc/shadowsocks-libev/config.json $PORT $PASSWORD
+ufw_port $PORT
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
-config "$2 $3" 
+config_info "$PORT" "$PASSWORD"
