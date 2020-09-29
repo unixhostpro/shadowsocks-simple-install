@@ -16,12 +16,6 @@ cat > "$1" <<EOF
 EOF
 }
 
-function ufw_port() {
-	if type ufw > /dev/null; then
-	        ufw allow "$2"/tcp
-	fi
-}
-
 function generate_hash() {
 	echo -n "$1":"$2" | base64
 }
@@ -35,16 +29,33 @@ function config_info() {
 	echo "Your shadowsocks proxy configuration:"
 	echo "URL: ss://$(generate_hash chacha20-ietf-poly1305 $PASSWORD)@$IP:$PORT"
 	echo "---------------------------------------"
-#	echo "Android client: https://play.google.com/store/apps/details?id=com.github.shadowsocks"
-#	echo "Clients for other devices: https://shadowsocks.org/en/download/clients.html"
 }
-
-
-DEBIAN_FRONTEND=noninteractive apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install -y shadowsocks-libev # install shadowsocks
+if [ -f "/etc/debian_version" ]; then
+	DEBIAN_FRONTEND=noninteractive apt-get update
+	DEBIAN_FRONTEND=noninteractive apt-get install -y shadowsocks-libev # install shadowsocks
+	ufw allow "$PORT"/tcp
+elif [ -f "/etc/redhat-release" ]; then
+	yum install -y epel-release
+	curl --location --output "/etc/yum.repos.d/librehat-shadowsocks-epel-7.repo" "https://copr.fedorainfracloud.org/coprs/librehat/shadowsocks/repo/epel-7/librehat-shadowsocks-epel-7.repo"
+	yum makecache
+	yum install -y bind-utils mbedtls
+	ln -sf /usr/lib64/libmbedcrypto.so.1 /usr/lib64/libmbedcrypto.so.0
+	yum install -y shadowsocks-libev
+	systemctl daemon-reload
+	systemctl enable shadowsocks-libev
+	systemctl restart shadowsocks-libev
+	firewall-cmd --zone=public --permanent --add-port="$PORT"/tcp
+	firewall-cmd --reload
+else
+  echo "Your OS not supported"
+  echo "Supported OS :"
+  echo "	Ubuntu 18.04"
+  echo "	Ubuntu 20.04"
+  echo "	Centos 7.0"
+fi
+  
 mkdir -p /etc/shadowsocks-libev # ceate config directory
 config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
-ufw_port $PORT
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
 config_info "$PORT" "$PASSWORD"
