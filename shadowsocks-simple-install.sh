@@ -40,8 +40,8 @@ function config_info() {
 }
 
 
-DEBIAN_FRONTEND=noninteractive apt update
-DEBIAN_FRONTEND=noninteractive apt install -y shadowsocks-libev # install shadowsocks
+DEBIAN_FRONTEND=noninteractive apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get install -y shadowsocks-libev # install shadowsocks
 mkdir -p /etc/shadowsocks-libev # ceate config directory
 config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 ufw_port $PORT
