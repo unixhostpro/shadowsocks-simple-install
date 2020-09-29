@@ -1,7 +1,7 @@
 #!/bin/bash
 export PORT=8000
 export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=16 )
-export IP=$(hostname -I)
+export IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 export ENCRYPTION=chacha20-ietf-poly1305
 function config() {
 cat > "$1" <<EOF
