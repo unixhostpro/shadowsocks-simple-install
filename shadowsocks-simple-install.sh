@@ -29,6 +29,9 @@ function generate_hash() {
 function config_info() {
 	echo
 	echo "---------------------------------------"
+	echo "GitHub : https://github.com/unixhostpro/shadowsocks-simple-install"
+	echo "web: https://unixhost.pro"
+	echo "--------------------------------------- "
 	echo "Your shadowsocks proxy configuration:"
 	echo "URL: ss://$(generate_hash chacha20-ietf-poly1305 $PASSWORD)@$IP:$PORT"
 	echo "---------------------------------------"
@@ -38,7 +41,7 @@ function config_info() {
 
 
 apt update
-apt install -y shadowsocks-libev # install shadowsocks
+DEBIAN_FRONTEND=noninteractive apt install -y shadowsocks-libev # install shadowsocks
 mkdir -p /etc/shadowsocks-libev # ceate config directory
 config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 ufw_port $PORT
