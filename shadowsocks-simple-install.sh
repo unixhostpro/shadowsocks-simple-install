@@ -32,6 +32,7 @@ function config() {
 #	echo "Clients for other devices: https://shadowsocks.org/en/download/clients.html"
 }
 
+
 apt update
 apt install -y shadowsocks-libev # install shadowsocks
 mkdir -p /etc/shadowsocks-libev # ceate config directory
@@ -39,3 +40,4 @@ config /etc/shadowsocks-libev/config.json $2 $3
 ufw_port $2
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
+config "$2 $3" 
