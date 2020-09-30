@@ -17,7 +17,7 @@ chmod +x shadowsocks-simple-install.sh
 ./shadowsocks-simple-install.sh
 ```
 
-Для установки Shadowsocks c поддержкой плагина v2ray 
+Для установки Shadowsocks c поддержкой плагина [v2ray](https://github.com/shadowsocks/v2ray-plugin/ "v2ray") 
 ```
 ./shadowsocks-simple-install.sh v2ray
 ```
