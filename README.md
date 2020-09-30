@@ -32,9 +32,9 @@ chmod +x shadowsocks-simple-install.sh
 
 **Мы в социальных сетях**
 
-[Наш сайт UnixHost](https://unixhost.pro/)
-[Блог UnixHost](https://blog.unixhost.pro/)
-[Telegram](https://t.me/unixhostpro)
-[Twitter](https://twitter.com/UnixHostPro)
-[Facebook](https://www.facebook.com/unixhost.pro)
-[Вконтакте](https://vk.com/unixhost)
+:fa-linux: [Наш сайт UnixHost](https://unixhost.pro/)
+:fa-book: [Блог UnixHost](https://blog.unixhost.pro/)
+:fa-paper-plane: [Telegram](https://t.me/unixhostpro)
+:fa-twitter: [Twitter](https://twitter.com/UnixHostPro)
+:fa-facebook-square: [Facebook](https://www.facebook.com/unixhost.pro)
+:fa-vk: [Вконтакте](https://vk.com/unixhost)
