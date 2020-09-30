@@ -74,9 +74,9 @@ else
   echo "	Ubuntu 20.04"
   echo "	Centos 7.0"
 fi
-  
+
 mkdir -p /etc/shadowsocks-libev # ceate config directory
-if [V2RAY == v2ray]; then
+if [ "$V2RAY" == "v2ray" ]; then
 	wget https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.3.1/v2ray-plugin-linux-amd64-v1.3.1.tar.gz
 	tar -xf v2ray-plugin-linux-amd64-v1.3.1.tar.gz
 	sudo mv v2ray-plugin_linux_amd64 /etc/shadowsocks-libev/v2ray-plugin
@@ -84,9 +84,12 @@ if [V2RAY == v2ray]; then
 	sudo setcap 'cap_net_bind_service=+ep' /etc/shadowsocks-libev/v2ray-plugin
 	sudo setcap 'cap_net_bind_service=+ep' /usr/bin/ss-server
 	config_v2ray /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
-elif [-z "V2RAY"]; then
+
+elif [ -z "$V2RAY" ]; then
 	config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 else
+echo "v2ray plugin installed"
+fi
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
 config_info "$PORT" "$PASSWORD"
