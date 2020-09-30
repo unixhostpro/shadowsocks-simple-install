@@ -58,6 +58,11 @@ function config_info() {
 	echo -e "${Yellow}iOS Client     :${Off} https://itunes.apple.com/app/outline-app/id1356177741"
 	echo -e "${Yellow}Other Clients  :${Off} https://shadowsocks.org/en/download/clients.html"
 	echo -e "${Yellow}---------------------------------------${Off}"
+	echo
+	echo -e "${Yellow}IP      :${Off}$IP "
+	echo -e "${Yellow}Port    :${Off}$PORT "
+	echo -e "${Yellow}Password:${Off}$PASSWORD "
+	echo -e "${Yellow}---------------------------------------${Off}"
 }
 if [ -f "/etc/debian_version" ]; then
 	DEBIAN_FRONTEND=noninteractive apt-get update
