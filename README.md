@@ -29,3 +29,12 @@ chmod +x shadowsocks-simple-install.sh
 - [Android](https://play.google.com/store/apps/details?id=com.github.shadowsocks "Android")
 - [iOS](https://itunes.apple.com/app/outline-app/id1356177741 "iOS")
 - [Клиенты для других систем](https://shadowsocks.org/en/download/clients.html "Клиенты для других систем")
+
+**Мы в социальных сетях**
+
+[Наш сайт UnixHost](https://unixhost.pro/)
+[Блог UnixHost](https://blog.unixhost.pro/)
+[Telegram](https://t.me/unixhostpro)
+[Twitter](https://twitter.com/UnixHostPro)
+[Facebook](https://www.facebook.com/unixhost.pro)
+[Вконтакте](https://vk.com/unixhost)
