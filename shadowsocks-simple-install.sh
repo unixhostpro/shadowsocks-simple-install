@@ -33,7 +33,7 @@ function config_info() {
 	echo
 	echo "Windows Client : https://github.com/shadowsocks/shadowsocks-windows/releases"
 	echo "Android Client : https://play.google.com/store/apps/details?id=com.github.shadowsocks"
-	echo "iOS Clietn     : https://itunes.apple.com/app/outline-app/id1356177741"
+	echo "iOS Client     : https://itunes.apple.com/app/outline-app/id1356177741"
 	echo "Other Clients  : https://shadowsocks.org/en/download/clients.html"
 	echo "---------------------------------------"
 }
