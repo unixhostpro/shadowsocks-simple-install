@@ -36,8 +36,13 @@ chmod +x shadowsocks-simple-install.sh
 **Мы в социальных сетях**
 
 <i class="fa fa-linux"></i> [Наш сайт UnixHost](https://unixhost.pro/)
+
 <i class="fa fa-book"></i> [Блог UnixHost](https://blog.unixhost.pro/)
+
 <i class="fa fa-paper-plane"></i> [Telegram](https://t.me/unixhostpro)
+
 <i class="fa fa-twitter"></i> [Twitter](https://twitter.com/UnixHostPro)
+
 <i class="fa fa-facebook-square"></i> [Facebook](https://www.facebook.com/unixhost.pro)
+
 <i class="fa fa-vk"></i> [Вконтакте](https://vk.com/unixhost)
