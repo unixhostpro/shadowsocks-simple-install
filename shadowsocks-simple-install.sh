@@ -3,6 +3,7 @@ export PORT=8000
 export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=16 )
 export IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 export ENCRYPTION=chacha20-ietf-poly1305
+export V2RAY=$1
 function config() {
 cat > "$1" <<EOF
 {
@@ -10,7 +11,20 @@ cat > "$1" <<EOF
     "server_port":$2,
     "local_port":1080,
     "password":"$3",
-    "timeout":60,
+    "timeout":300,
+    "method":"$ENCRYPTION"
+}
+EOF
+}
+function config_v2ray() {
+cat > "$1" <<EOF
+{
+    "server":"0.0.0.0",
+    "server_port":$2,
+    "local_port":1080,
+    "password":"$3",
+    "plugin":"/etc/shadowsocks-libev/v2ray-plugin",
+    "timeout":3000,
     "method":"$ENCRYPTION"
 }
 EOF
@@ -63,6 +77,13 @@ fi
   
 mkdir -p /etc/shadowsocks-libev # ceate config directory
 config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
+if [$1 == v2ray]; then
+	wget https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.3.1/v2ray-plugin-linux-amd64-v1.3.1.tar.gz
+	tar -xf v2ray-plugin-linux-amd64-v1.3.1.tar.gz
+	sudo mv v2ray-plugin_linux_amd64 /etc/shadowsocks-libev/v2ray-plugin
+	sudo chmod +x  /etc/shadowsocks-libev/v2ray-plugin
+	sudo setcap 'cap_net_bind_service=+ep' /etc/shadowsocks-libev/v2ray-plugin
+	sudo setcap 'cap_net_bind_service=+ep' /usr/bin/ss-server
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
 config_info "$PORT" "$PASSWORD"
