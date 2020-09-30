@@ -4,6 +4,14 @@ export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head -
 export IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 export ENCRYPTION=chacha20-ietf-poly1305
 export V2RAY=$1
+
+#colors for bash
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
+Off='\033[0m'       # Text Reset
+
+
 function config() {
 cat > "$1" <<EOF
 {
@@ -36,20 +44,20 @@ function generate_hash() {
 
 function config_info() {
 	echo
-	echo "---------------------------------------"
-	echo "GitHub : https://github.com/unixhostpro/shadowsocks-simple-install"
-	echo "web: https://unixhost.pro"
-	echo 
-	echo "--------------------------------------- "
-	echo 
-	echo "Your shadowsocks proxy configuration:"
-	echo "URL: ss://$(generate_hash chacha20-ietf-poly1305 $PASSWORD)@$IP:$PORT"
+	echo -e "${Yellow}---------------------------------------"
+	echo -e "${Yellow}GitHub:${Off} https://github.com/unixhostpro/shadowsocks-simple-install"
+	echo -e "${Yellow}Web:${Off}    ${Red}https://unixhost.pro${Off}"
 	echo
-	echo "Windows Client : https://github.com/shadowsocks/shadowsocks-windows/releases"
-	echo "Android Client : https://play.google.com/store/apps/details?id=com.github.shadowsocks"
-	echo "iOS Client     : https://itunes.apple.com/app/outline-app/id1356177741"
-	echo "Other Clients  : https://shadowsocks.org/en/download/clients.html"
-	echo "---------------------------------------"
+	echo -e "${Yellow}---------------------------------------${Off}"
+	echo 
+	echo -e "${Green}Your shadowsocks proxy configuration:${Off}"
+	echo -e "${Yellow}URL:${Off} ss://$(generate_hash chacha20-ietf-poly1305 $PASSWORD)@$IP:$PORT"
+	echo
+	echo -e "${Yellow}Windows Client :${Off} https://github.com/shadowsocks/shadowsocks-windows/releases"
+	echo -e "${Yellow}Android Client :${Off} https://play.google.com/store/apps/details?id=com.github.shadowsocks"
+	echo -e "${Yellow}iOS Client     :${Off} https://itunes.apple.com/app/outline-app/id1356177741"
+	echo -e "${Yellow}Other Clients  :${Off} https://shadowsocks.org/en/download/clients.html"
+	echo -e "${Yellow}---------------------------------------${Off}"
 }
 if [ -f "/etc/debian_version" ]; then
 	DEBIAN_FRONTEND=noninteractive apt-get update
@@ -88,7 +96,7 @@ if [ "$V2RAY" == "v2ray" ]; then
 elif [ -z "$V2RAY" ]; then
 	config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 else
-echo "v2ray plugin installed"
+echo -e  "${Red}v2ray plugin installed${Off}"
 fi
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
