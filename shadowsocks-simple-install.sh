@@ -1,5 +1,5 @@
 #!/bin/bash
-export PORT=8000
+export PORT=8000 # Если порт 8000 заблокирован в вашей сети, измените на любой бругой 
 export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=16 )
 export IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 export ENCRYPTION=chacha20-ietf-poly1305
