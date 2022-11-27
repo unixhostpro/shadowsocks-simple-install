@@ -45,4 +45,3 @@ chmod +x shadowsocks-simple-install.sh
 
 <i class="fa fa-facebook-square"></i> [Facebook](https://www.facebook.com/unixhost.pro)
 
-<i class="fa fa-vk"></i> [Вконтакте](https://vk.com/unixhost)
